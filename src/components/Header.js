@@ -41,7 +41,8 @@ function Header() {
   const { currency, setCurrency } = CryptoState();
 
   const history = useHistory();
-  const [activeTab, setActiveTab] = React.useState(0);
+  const [activeTab=0, setActiveTab] = React.useState(0);
+
 
   const handleChange = (event, newValue) => {
 
@@ -57,21 +58,22 @@ function Header() {
   return (
     <ThemeProvider theme={darkTheme}>
       <AppBar color="transparent" position="static">
-        <Container>
-          <Toolbar >
-            <Typography
+        <Container >
+          <Toolbar sx={{ justifyContent: "space-between" }}>
+            {/* <Typography
               onClick={() => history.push(`/`)}
               variant="h6"
               className={classes.title}
             >
               Crypto Hunter
-            </Typography>
-            <Tabs value={activeTab} onChange={handleChange} centered>
+            </Typography> */}
+    
+            <Tabs value={activeTab} onChange={handleChange} >
               <Tab icon={<HomeIcon />} iconPosition="start" label="Home" />
               <Tab icon={<AccountBalanceWalletIcon />} iconPosition="start" label="Wallet" />
             </Tabs>
             {/* <Button color="inherit">Login</Button> */}
-            <Select
+            <Select 
               variant="outlined"
               labelId="demo-simple-select-label"
               id="demo-simple-select"

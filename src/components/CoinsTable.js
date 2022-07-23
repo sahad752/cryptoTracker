@@ -135,7 +135,7 @@ export default function CoinsTable() {
               <TableBody>
                 {handleSearch()
                   .slice((page - 1) * 10, (page - 1) * 10 + 10)
-                  .map((row) => {
+                  .map((row,index) => {
                     const profit = row.price_change_percentage_24h > 0;
                     return (
                       <TableRow
@@ -143,7 +143,7 @@ export default function CoinsTable() {
                         className={classes.row}
                         key={row.name}
                       >
-                        <TableCell>{row.rank}</TableCell>
+                        <TableCell>{index+1}</TableCell>
                         <TableCell
                           component="th"
                           scope="row"
