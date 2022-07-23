@@ -6,6 +6,8 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
+import React from "react";
+import HomeIcon from '@mui/icons-material/Home';
 import {
   createTheme,
   makeStyles,
@@ -13,7 +15,8 @@ import {
 } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import { CryptoState } from "../CryptoContext";
-
+import { Tab, Tabs } from "@mui/material";
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 const useStyles = makeStyles((theme) => ({
   title: {
     flex: 1,
@@ -38,12 +41,24 @@ function Header() {
   const { currency, setCurrency } = CryptoState();
 
   const history = useHistory();
+  const [activeTab, setActiveTab] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+
+    setActiveTab(newValue);
+    if (newValue === 0) {
+      history.push("/");
+    } else if (newValue === 1) {
+      history.push('/wallet');
+    }
+
+  }
 
   return (
     <ThemeProvider theme={darkTheme}>
       <AppBar color="transparent" position="static">
         <Container>
-          <Toolbar>
+          <Toolbar >
             <Typography
               onClick={() => history.push(`/`)}
               variant="h6"
@@ -51,6 +66,10 @@ function Header() {
             >
               Crypto Hunter
             </Typography>
+            <Tabs value={activeTab} onChange={handleChange} centered>
+              <Tab icon={<HomeIcon />} iconPosition="start" label="Home" />
+              <Tab icon={<AccountBalanceWalletIcon />} iconPosition="start" label="Wallet" />
+            </Tabs>
             {/* <Button color="inherit">Login</Button> */}
             <Select
               variant="outlined"
