@@ -116,7 +116,7 @@ export default function CoinsTable() {
             <Table aria-label="simple table">
               <TableHead style={{ backgroundColor: "#EEBC1D" }}>
                 <TableRow>
-                  {["Coin", "Price", "24h Change", "Market Cap"].map((head) => (
+                  {["#","Coin"," ", "Price", "24h Change", "Market Cap"].map((head) => (
                     <TableCell
                       style={{
                         color: "black",
@@ -124,7 +124,7 @@ export default function CoinsTable() {
                         fontFamily: "Montserrat",
                       }}
                       key={head}
-                      align={head === "Coin" ? "" : "right"}
+                      // align={head === "Coin" ? "" : "right"}
                     >
                       {head}
                     </TableCell>
@@ -143,6 +143,7 @@ export default function CoinsTable() {
                         className={classes.row}
                         key={row.name}
                       >
+                        <TableCell>{row.rank}</TableCell>
                         <TableCell
                           component="th"
                           scope="row"
@@ -166,19 +167,31 @@ export default function CoinsTable() {
                                 fontSize: 22,
                               }}
                             >
-                              {row.symbol}
+                             
                             </span>
                             <span style={{ color: "darkgrey" }}>
                               {row.name}
                             </span>
                           </div>
                         </TableCell>
-                        <TableCell align="right">
+                        <TableCell >
+                          
+                          <span
+                              style={{
+                                textTransform: "uppercase",
+                                fontSize: 22,
+                              }}
+                            >
+                                                     {row.symbol}
+
+                            </span>
+                        </TableCell>
+                        <TableCell>
                           {symbol}{" "}
                           {numberWithCommas(row.current_price.toFixed(2))}
                         </TableCell>
                         <TableCell
-                          align="right"
+                        
                           style={{
                             color: profit > 0 ? "rgb(14, 203, 129)" : "red",
                             fontWeight: 500,
@@ -187,7 +200,7 @@ export default function CoinsTable() {
                           {profit && "+"}
                           {row.price_change_percentage_24h.toFixed(2)}%
                         </TableCell>
-                        <TableCell align="right">
+                        <TableCell >
                           {symbol}{" "}
                           {numberWithCommas(
                             row.market_cap.toString().slice(0, -6)
