@@ -8,6 +8,7 @@ import { SingleCoin } from "../config/api";
 import { numberWithCommas } from "../components/CoinsTable";
 import { CryptoState } from "../CryptoContext";
 import { BackpackOutlined, BackpackRounded } from "@mui/icons-material";
+import Header from "../components/Header";
 
 const CoinPage = () => {
   const { id } = useParams();
@@ -83,7 +84,10 @@ const CoinPage = () => {
   if (!coin) return <LinearProgress style={{ backgroundColor: "gold" }} />;
 
   return (
+    <div>
+      <Header showbackbutton/>
     <div className={classes.container}>
+      
       {/* <div className={classes.sidebar}>
         <img
           src={coin?.image.large}
@@ -152,11 +156,12 @@ const CoinPage = () => {
           </span>
         </div>
       </div> */}
-      <div className={classes.sidebar} >
+      {/* <div className={classes.sidebar} >
         <BackpackRounded style={{ fontSize: "3rem" }} />
         back
-        </div>
+        </div> */}
       <CoinInfo coin={coin} className ={classes.marketData} />
+    </div>
     </div>
   );
 };

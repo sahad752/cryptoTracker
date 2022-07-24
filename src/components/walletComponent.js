@@ -1,12 +1,15 @@
 
 import { Button, Container, makeStyles, Typography } from "@material-ui/core";
+import { Icon } from "@mui/material";
+import { Box } from "@mui/system";
+import Header from "./Header";
 
 const useStyles = makeStyles((theme) => ({
   // banner: {
   //   backgroundImage: "url(./banner2.jpg)",
   // },
   image : {
-    width: "20%",
+    width: "15%",
     height: "50%",
     // objectFit: "cover",
     alignSelf: "center",
@@ -40,6 +43,7 @@ function WAllet() {
 
   return (
     <div className={classes.banner}>
+      <Header activeTab={1} showMenu/>
       <Container className={classes.bannerContent}>
         <div className={classes.tagline}>
           
@@ -59,7 +63,18 @@ function WAllet() {
 
         </div>
         {/* <Carousel /> */}
+        
+        <Box style={{background:"#000"}}>
+          <Box>
+            <img src="./nrglogo.png" style={{width:"20%"}}/>
+            <Typography>
+              Energi Network
+            </Typography>
+          </Box>
+        </Box>
+
       </Container>
+      
     </div>
   );
 }

@@ -103,18 +103,18 @@ export default function CoinsTable() {
         >
           {/* Cryptocurrency Prices by Market Cap */}
         </Typography>
-        <TextField
+        {/* <TextField
           label="Search For a Crypto Currency.."
           variant="outlined"
           style={{ marginBottom: 20, width: "100%" }}
           onChange={(e) => setSearch(e.target.value)}
-        />
+        /> */}
         <TableContainer component={Paper}>
           {loading ? (
             <LinearProgress style={{ backgroundColor: "gold" }} />
           ) : (
             <Table aria-label="simple table">
-              <TableHead style={{ backgroundColor: "#EEBC1D" }}>
+              <TableHead >
                 <TableRow>
                   {["#","Coin"," ", "Price", "24h Change", "Market Cap"].map((head) => (
                     <TableCell
@@ -156,20 +156,12 @@ export default function CoinsTable() {
                             src={row?.image}
                             alt={row.name}
                             height="50"
-                            style={{ marginBottom: 10 }}
+                            
                           />
                           <div
-                            style={{ display: "flex", flexDirection: "column" }}
+                            style={{ display: "flex", flexDirection: "column",justifyContent: "center" }}
                           >
-                            <span
-                              style={{
-                                textTransform: "uppercase",
-                                fontSize: 22,
-                              }}
-                            >
-                             
-                            </span>
-                            <span style={{ color: "darkgrey" }}>
+                            <span style={{ color: "darkgrey",alignSelf:"center" }}>
                               {row.name}
                             </span>
                           </div>

@@ -6,7 +6,7 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import HomeIcon from '@mui/icons-material/Home';
 import {
   createTheme,
@@ -17,6 +17,8 @@ import { useHistory } from "react-router-dom";
 import { CryptoState } from "../CryptoContext";
 import { Tab, Tabs } from "@mui/material";
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import { ArrowBack, DarkModeOutlined } from "@mui/icons-material";
+import { Box, width } from "@mui/system";
 const useStyles = makeStyles((theme) => ({
   title: {
     flex: 1,
@@ -36,31 +38,27 @@ const darkTheme = createTheme({
   },
 });
 
-function Header() {
+function Header({ activeTab = 0, showbackbutton, showMenu }) {
   const classes = useStyles();
   const { currency, setCurrency } = CryptoState();
-
   const history = useHistory();
-  const [activeTab, setActiveTab] = React.useState(0);
-
   const defautlvalue = 0;
 
   const handleChange = (event, newValue) => {
 
-    setActiveTab(newValue);
     if (newValue === 0) {
       history.push("/");
     } else if (newValue === 1) {
       history.push('/wallet');
     }
 
-  }
+  };
 
   return (
     <ThemeProvider theme={darkTheme}>
       <AppBar color="transparent" position="static">
-        <Container style={{justifyContent: "center" }}  id="appBar" >
-          <Toolbar>
+        <Container id="appBar" >
+          <Toolbar style={{ diplay: 'flex', justifyContent: "space-between" ,width:"100%" }}>
             {/* <Typography
               onClick={() => history.push(`/`)}
               variant="h6"
@@ -68,11 +66,30 @@ function Header() {
             >
               Crypto Hunter
             </Typography> */}
-    
-            <Tabs value={activeTab} onChange={handleChange} >
-              <Tab icon={<HomeIcon />} iconPosition="start" label="Home" />
-              <Tab icon={<AccountBalanceWalletIcon />} iconPosition="start" label="Wallet" />
-            </Tabs>
+
+            <Box >
+            {
+              showbackbutton &&
+              <Box onClick={() => history.push(`/`)} display="flex" style={{cursor:"pointer"}} >
+                <ArrowBack />
+                <Typography style={{marginLeft:20}}>back</Typography>
+              </Box>
+            }
+            </Box>
+            <Box >
+            {
+              showMenu &&
+              <Tabs value={activeTab} onChange={handleChange} >
+                <Tab icon={<HomeIcon />} iconPosition="start" label="Home" />
+                <Tab icon={<AccountBalanceWalletIcon />} iconPosition="start" label="Wallet" />
+              </Tabs>
+            }
+            </Box>
+            
+            <DarkModeOutlined onClick={() => setCurrency(currency === "USD" ? "EUR" : "USD")} />
+         
+
+            
             {/* <Button color="inherit">Login</Button> */}
             {/* <Select 
               variant="outlined"
@@ -88,7 +105,7 @@ function Header() {
           </Toolbar>
         </Container>
         <Container>
-          
+
         </Container>
       </AppBar>
     </ThemeProvider>
