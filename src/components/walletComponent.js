@@ -1,10 +1,12 @@
 
 import { Container, makeStyles } from "@material-ui/core";
-import { Circle, ContentCopy, IosShare, Visibility } from "@mui/icons-material";
+import { Circle, ContentCopy, IosShare, Padding, Visibility } from "@mui/icons-material";
 import { Button, Card, Divider, Icon, IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import Header from "./Header";
 import WalletCoinTile from "./WalanceCoinTile";
+import { useState, useEffect } from 'react';
+import { ethers } from 'ethers';
 
 const useStyles = makeStyles((theme) => ({
   // banner: {
@@ -70,14 +72,54 @@ function WAllet() {
 
   const coins = [
   
-
-    
   ]
+  const [haveMetamask, sethaveMetamask] = useState(true);
+  const [accountAddress, setAccountAddress] = useState('');
+  const [accountBalance, setAccountBalance] = useState('');
+  const [isConnected, setIsConnected] = useState(false);
+
+  const { ethereum } = window;
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+  useEffect(() => {
+    const { ethereum } = window;
+    const checkMetamaskAvailability = async () => {
+      if (!ethereum) {
+        sethaveMetamask(false);
+      }
+      sethaveMetamask(true);
+    };
+    checkMetamaskAvailability();
+  }, []);
+
+  const connectWallet = async () => {
+    try {
+      if (!ethereum) {
+        sethaveMetamask(false);
+      }
+      const accounts = await ethereum.request({
+        method: 'eth_requestAccounts',
+      });
+      let balance = await provider.getBalance(accounts[0]);
+      let bal = ethers.utils.formatEther(balance);
+      setAccountAddress(accounts[0]);
+      setAccountBalance(bal);
+      setIsConnected(true);
+    } catch (error) {
+      setIsConnected(false);
+    }
+  };
+
+
 
   return (
     <div className={classes.banner}>
       <Header activeTab={1} showMenu />
       <Container className={classes.bannerContent}>
+        
+        
+        
+        {!isConnected?(
         <div className={classes.tagline}>
 
           <img src="./metamask.png" className={classes.image} />
@@ -92,26 +134,28 @@ function WAllet() {
           >
             MetaMask
           </Typography>
-          <Button variant="contained" color="success">Connect to wallet</Button>
+          <Button variant="contained" color="success" onClick={connectWallet} >Connect to wallet</Button>
 
-        </div>
-        {/* <Carousel /> */}
-
+        </div>):(<div> </div>)
+        
+        }
+        {isConnected ?(
         <Card className={classes.walletCard}>
           <Box className={classes.flexRow}>
             <Box className={classes.iconText}>
-              <img src="./nrglogo.png" style={{ width: 20 }} />
+              <img src="./nrglogo.jpeg" style={{ width: 20, margin:10}} />
               <Typography >Energi Network</Typography>
             </Box>
             <Box display='flex'>
-              <Circle fontSize="small" />
+              <Circle fontSize="small" color="success" />
               <Typography ml={1}>Connected</Typography>
             </Box>
           </Box>
           <Divider />
           <Box className={classes.flexRow}>
             <Box className={classes.iconText}>
-              <img src="./nrglogo.png" style={{ width: 20 }} />
+              <img src="./metamask.png
+              " style={{ width: 20,margin:10 }} />
               <Typography >Energi Network</Typography>
             </Box>
             <Box display='flex'>
@@ -143,7 +187,7 @@ function WAllet() {
               />
             })}
           </Box>
-        </Card>
+        </Card>) : (<div></div>)}
 
       </Container>
 
