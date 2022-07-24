@@ -41,8 +41,9 @@ function Header() {
   const { currency, setCurrency } = CryptoState();
 
   const history = useHistory();
-  const [activeTab=0, setActiveTab] = React.useState(0);
+  const [activeTab, setActiveTab] = React.useState(0);
 
+  const defautlvalue = 0;
 
   const handleChange = (event, newValue) => {
 
@@ -58,8 +59,8 @@ function Header() {
   return (
     <ThemeProvider theme={darkTheme}>
       <AppBar color="transparent" position="static">
-        <Container >
-          <Toolbar sx={{ justifyContent: "space-between" }}>
+        <Container style={{justifyContent: "center" }}  id="appBar" >
+          <Toolbar>
             {/* <Typography
               onClick={() => history.push(`/`)}
               variant="h6"
@@ -73,7 +74,7 @@ function Header() {
               <Tab icon={<AccountBalanceWalletIcon />} iconPosition="start" label="Wallet" />
             </Tabs>
             {/* <Button color="inherit">Login</Button> */}
-            <Select 
+            {/* <Select 
               variant="outlined"
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -83,7 +84,7 @@ function Header() {
             >
               <MenuItem value={"USD"}>USD</MenuItem>
               <MenuItem value={"INR"}>INR</MenuItem>
-            </Select>
+            </Select> */}
           </Toolbar>
         </Container>
       </AppBar>

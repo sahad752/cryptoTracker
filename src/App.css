@@ -11,3 +11,10 @@ a {
   text-decoration: none;
   color: gold;
 }
+
+#appBar {
+  display: flex;
+  justify-content:  center;
+  align-items: center;
+}
+
