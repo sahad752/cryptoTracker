@@ -30,9 +30,9 @@ const useStyles = makeStyles((theme) => ({
 const darkTheme = createTheme({
   palette: {
     primary: {
-      main: "#fff",
+      main: "#000",
     },
-    type: "dark",
+    mode: "dark",
   },
 });
 
@@ -86,6 +86,9 @@ function Header() {
               <MenuItem value={"INR"}>INR</MenuItem>
             </Select> */}
           </Toolbar>
+        </Container>
+        <Container>
+          
         </Container>
       </AppBar>
     </ThemeProvider>

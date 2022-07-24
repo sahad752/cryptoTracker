@@ -45,7 +45,7 @@ export default function CoinsTable() {
     },
     pagination: {
       "& .MuiPaginationItem-root": {
-        color: "gold",
+        color: "black",
       },
     },
   });
@@ -65,7 +65,7 @@ export default function CoinsTable() {
   const lightTheme = createTheme({
     palette: {
       primary: {
-        main: "#000",
+        main: "#fff",
       },
       type: "light",
     },
@@ -101,7 +101,7 @@ export default function CoinsTable() {
           variant="h4"
           style={{ margin: 18, fontFamily: "Montserrat" }}
         >
-          Cryptocurrency Prices by Market Cap
+          {/* Cryptocurrency Prices by Market Cap */}
         </Typography>
         <TextField
           label="Search For a Crypto Currency.."

@@ -1,4 +1,4 @@
-import { LinearProgress, makeStyles, Typography } from "@material-ui/core";
+import { Button, IconButton, LinearProgress, makeStyles, Typography } from "@material-ui/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -7,6 +7,7 @@ import CoinInfo from "../components/CoinInfo";
 import { SingleCoin } from "../config/api";
 import { numberWithCommas } from "../components/CoinsTable";
 import { CryptoState } from "../CryptoContext";
+import { BackpackOutlined, BackpackRounded } from "@mui/icons-material";
 
 const CoinPage = () => {
   const { id } = useParams();
@@ -34,7 +35,7 @@ const CoinPage = () => {
       },
     },
     sidebar: {
-      width: "30%",
+      width: "2%",
       [theme.breakpoints.down("md")]: {
         width: "100%",
       },
@@ -42,7 +43,8 @@ const CoinPage = () => {
       flexDirection: "column",
       alignItems: "center",
       marginTop: 25,
-      borderRight: "2px solid grey",
+      marginLeft: 20,
+      // borderRight: "2px solid grey",
     },
     heading: {
       fontWeight: "bold",
@@ -82,7 +84,7 @@ const CoinPage = () => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.sidebar}>
+      {/* <div className={classes.sidebar}>
         <img
           src={coin?.image.large}
           alt={coin?.name}
@@ -149,8 +151,12 @@ const CoinPage = () => {
             </Typography>
           </span>
         </div>
-      </div>
-      <CoinInfo coin={coin} />
+      </div> */}
+      <div className={classes.sidebar} >
+        <BackpackRounded style={{ fontSize: "3rem" }} />
+        back
+        </div>
+      <CoinInfo coin={coin} className ={classes.marketData} />
     </div>
   );
 };

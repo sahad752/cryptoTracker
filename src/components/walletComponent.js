@@ -1,10 +1,16 @@
 
-import { Container, makeStyles, Typography } from "@material-ui/core";
-import Carousel from "./Banner/Carousel";
+import { Button, Container, makeStyles, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  banner: {
-    backgroundImage: "url(./banner2.jpg)",
+  // banner: {
+  //   backgroundImage: "url(./banner2.jpg)",
+  // },
+  image : {
+    width: "20%",
+    height: "50%",
+    // objectFit: "cover",
+    alignSelf: "center",
+    marginBottom: 20,
   },
   bannerContent: {
     height: 400,
@@ -14,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-around",
   },
   tagline: {
-    display: "flex",
-    height: "40%",
+    // display: "flex",
+    // height: "40%",
     flexDirection: "column",
     justifyContent: "center",
     textAlign: "center",
@@ -29,33 +35,30 @@ const useStyles = makeStyles((theme) => ({
 
 function WAllet() {
   const classes = useStyles();
+  // const {activateBrowserWallet, account } = useEthers();
+
 
   return (
     <div className={classes.banner}>
       <Container className={classes.bannerContent}>
         <div className={classes.tagline}>
-          <Typography
-            variant="h2"
+          
+         <img src="./metamask.png"  className ={classes.image}/>
+         <Typography
+            variant="h3"
             style={{
               fontWeight: "bold",
-              marginBottom: 15,
+              marginBottom: 30,
               fontFamily: "Montserrat",
+              
             }}
           >
-            Crypto Hunter
+            MetaMask
           </Typography>
-          <Typography
-            variant="subtitle2"
-            style={{
-              color: "darkgrey",
-              textTransform: "capitalize",
-              fontFamily: "Montserrat",
-            }}
-          >
-            Get all the Info regarding your favorite Crypto Currency
-          </Typography>
+          <Button variant="contained" color="primary">Connect to wallet</Button>
+
         </div>
-        <Carousel />
+        {/* <Carousel /> */}
       </Container>
     </div>
   );
