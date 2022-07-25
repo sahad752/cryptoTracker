@@ -77,6 +77,7 @@ function WAllet() {
   const [accountAddress, setAccountAddress] = useState('');
   const [accountBalance, setAccountBalance] = useState('');
   const [isConnected, setIsConnected] = useState(false);
+  const [networkName, setNetworkName] = useState('');
 
   const { ethereum } = window;
   const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -102,6 +103,8 @@ function WAllet() {
       });
       let balance = await provider.getBalance(accounts[0]);
       let bal = ethers.utils.formatEther(balance);
+      let networkName = await provider.getNetwork();
+      setNetworkName(networkName.name);
       setAccountAddress(accounts[0]);
       setAccountBalance(bal);
       setIsConnected(true);
@@ -144,7 +147,7 @@ function WAllet() {
           <Box className={classes.flexRow}>
             <Box className={classes.iconText}>
               <img src="./nrglogo.jpeg" style={{ width: 20, margin:10}} />
-              <Typography >Energi Network</Typography>
+              <Typography >{networkName}</Typography>
             </Box>
             <Box display='flex'>
               <Circle fontSize="small" color="success" />
@@ -156,7 +159,7 @@ function WAllet() {
             <Box className={classes.iconText}>
               <img src="./metamask.png
               " style={{ width: 20,margin:10 }} />
-              <Typography >Energi Network</Typography>
+              <Typography >{accountAddress}</Typography>
             </Box>
             <Box display='flex'>
               <IconButton><ContentCopy /></IconButton>
@@ -167,7 +170,7 @@ function WAllet() {
           <Box className={classes.totalBalanceContainer}>
             <Typography variant="caption">Total Balance</Typography>
             <Box className={classes.iconText}>
-              <Typography variant='h6' fontWeight='bold' mr={1} >$4200</Typography>
+              <Typography variant='h6' fontWeight='bold' mr={1} >{accountBalance}</Typography>
               <Visibility />
             </Box>
             <Box className={classes.flexRow} mt={2}>
